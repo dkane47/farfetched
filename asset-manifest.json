@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/farfetched)/static/css/main.2b830c4e.css",
-    "main.js": "/farfetched)/static/js/main.aaea31d4.js",
-    "static/js/787.e9ef5704.chunk.js": "/farfetched)/static/js/787.e9ef5704.chunk.js",
-    "index.html": "/farfetched)/index.html",
-    "main.2b830c4e.css.map": "/farfetched)/static/css/main.2b830c4e.css.map",
-    "main.aaea31d4.js.map": "/farfetched)/static/js/main.aaea31d4.js.map",
-    "787.e9ef5704.chunk.js.map": "/farfetched)/static/js/787.e9ef5704.chunk.js.map"
+    "main.css": "/farfetched/static/css/main.2b830c4e.css",
+    "main.js": "/farfetched/static/js/main.367ff288.js",
+    "static/js/787.e9ef5704.chunk.js": "/farfetched/static/js/787.e9ef5704.chunk.js",
+    "index.html": "/farfetched/index.html",
+    "main.2b830c4e.css.map": "/farfetched/static/css/main.2b830c4e.css.map",
+    "main.367ff288.js.map": "/farfetched/static/js/main.367ff288.js.map",
+    "787.e9ef5704.chunk.js.map": "/farfetched/static/js/787.e9ef5704.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2b830c4e.css",
-    "static/js/main.aaea31d4.js"
+    "static/js/main.367ff288.js"
   ]
 }
