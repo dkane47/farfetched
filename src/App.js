@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 
 const App = () => {
@@ -49,7 +48,7 @@ const App = () => {
         ...prevLogic,
         step: prevLogic.step + 1
       }));
-    } else if (logic.step >= 11 && logic.operation == 3) { //if finished first four rounds do harder mutliplication
+    } else if (logic.step >= 11 && logic.operation === 3) { //if finished first four rounds do harder mutliplication
       setLogic((prevLogic) => ({
         ...prevLogic,
         step: 0,
@@ -75,10 +74,17 @@ const App = () => {
     }
     
     if (displaySettings.switched) { //reset messages if counting down in practice mode
+      let problems;
+      if (displaySettings.totalProblems - logic.step === 1) {
+        problems = " problem";
+      } else {
+        problems = " problems";
+      }
+      
       setMessages((prevMessages) => ({
         ...prevMessages,
         message1: 'Solve it!',
-        countdown: (displaySettings.totalProblems - logic.step).toString() + " problems left"
+        countdown: (displaySettings.totalProblems - logic.step).toString() + problems + " left"
           }));
     } else {
         setMessages((prevMessages) => ({ //reset messages if not in practice mode
@@ -131,7 +137,7 @@ const App = () => {
     
     // generate second number randomly with some logic based on size
     let newNum2;
-    if (newNum1 == 0) {
+    if (newNum1 === 0) {
       newNum2 = Math.floor(Math.random() * 12);
     } else if (newNum1 <= 2) {
       newNum2 = Math.floor(Math.random() * 9 + 1);
@@ -142,7 +148,7 @@ const App = () => {
     }
     
     // if there is a held problem, set the problem to the held problem
-    if (holdData.hold && logic.step % 2 == 0) {
+    if (holdData.hold && logic.step % 2 === 0) { // eslint-disable-next-line react-hooks/exhaustive-deps
       setProblem((prevProblem) => ({
         ...prevProblem,
         num1: holdData.held[0],
@@ -155,7 +161,7 @@ const App = () => {
         hold: false
       }));
     } else if (Math.random() < 0.5) { // randomize order of num1 and num2
-      setProblem((prevProblem) => ({
+      setProblem((prevProblem) => ({ // eslint-disable-next-line react-hooks/exhaustive-deps
         ...prevProblem,
         num1: newNum1,
         num2: newNum2,
@@ -163,7 +169,7 @@ const App = () => {
         startTime: Date.now() // Update startTime with the current timestamp
       }));
     } else { //alternate random order for num1 and num2
-      setProblem((prevProblem) => ({
+      setProblem((prevProblem) => ({ // eslint-disable-next-line react-hooks/exhaustive-deps
         ...prevProblem,
         num1: newNum2,
         num2: newNum1,
@@ -171,7 +177,7 @@ const App = () => {
         startTime: Date.now() // Update startTime with the current timestamp
       }));
     }
-  }, [logic.operation, logic.step, logic.sequence]); //dependencies to run useEffect
+  }, [logic.operation, logic.step, logic.sequence, holdData.hold, holdData.held]); //dependencies to run useEffect
   
   const hold = () => { // save a problem to repeat if user gets it wrong or slow in practic emode
     setHoldData((prevHold) => ({ // set a boolean and problem so useEffect uses this problem
@@ -191,10 +197,10 @@ const App = () => {
     const ans = problem.num1 * problem.num2;
     //variable for correctness with conditional
     let correct;
-    if (logic.operation == 0 || logic.operation == 4) {
-      correct = problem.userAnswer == ans;
+    if (logic.operation === 0 || logic.operation === 4) {
+      correct = parseInt(problem.userAnswer) === ans;
     } else {
-      correct = problem.userAnswer == problem.num2;
+      correct = parseInt(problem.userAnswer) === problem.num2;
     }
     
     if (correct) { //conditionals if answer is correct
@@ -211,7 +217,7 @@ const App = () => {
           generateProblem();
         } else if (tookMoreThanThreeSeconds && !displaySettings.switched) {//slow and analyzing mode
           targetedPractice();
-        } else if (tookMoreThanThreeSeconds && displaySettings.switched && logic.step % 2 == 0) {
+        } else if (tookMoreThanThreeSeconds && displaySettings.switched && logic.step % 2 === 0) {
           hold();
           generateProblem();
         } else {
@@ -233,7 +239,7 @@ const App = () => {
         ...prevSettings,
         switch: true
       }));
-      } else if (displaySettings.switched && logic.step % 2 == 0) {
+      } else if (displaySettings.switched && logic.step % 2 === 0) {
         hold();
       }
     }
@@ -277,7 +283,7 @@ const App = () => {
 const Introduction = ({ onReadyClick }) => {
   return (
     <div className="container">
-      <h1>Welcome to Pulse</h1>
+      <h1>Welcome to Fact Pulse</h1>
       <button className="ready-btn" onClick={onReadyClick}>Ready?</button>
     </div>
   );
